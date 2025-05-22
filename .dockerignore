@@ -1,12 +1,7 @@
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-# .env
-.venv
-# env/
-venv/
-ENV/
-.git
-.gitignore
-# db.sqlite3
+# __pycache__/
+# *.py[cod]
+# *$py.class
+# *.so
+# .git
+# .gitignore
+# # db.sqlite3

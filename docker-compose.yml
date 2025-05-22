@@ -1,7 +1,7 @@
 services:
   movies:
     build: .
-    command: python movie_project/manage.py runserver 0.0.0.0:8000
+    command: bash -c "python movie_project/manage.py makemigrations && python movie_project/manage.py migrate && python movie_project/manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./app/:/usr/src/app/
     ports:
@@ -21,7 +21,7 @@ services:
     environment:
       - POSTGRES_USER=movies
       - POSTGRES_PASSWORD=movies
-      - POSTGRES_DB=movie_dev
+      - POSTGRES_DB=movies_dev
 
 volumes:
   postgres_data:
