@@ -63,15 +63,17 @@ def test_add_movie_invalid_json_keys(client):
     assert len(movies) == 0
 
 
+@pytest.mark.django_db
 def test_get_single_movie(client):
     movies = Movie.objects.create(
         title="test", genre='test genre', year='1999')
 
-    resp = client.get(f'api/movies/{movies.id}/')
+    resp = client.get(f'/api/movies/{movies.id}/')
     assert resp.status_code == 200
     assert resp.data['title'] == 'test'
 
 
+@pytest.mark.django_db
 def test_get_single_movie_incorrect_id(client):
     resp = client.get("api/movies/foo/")
-    assert resp.status == 200
+    assert resp.status_code == 404

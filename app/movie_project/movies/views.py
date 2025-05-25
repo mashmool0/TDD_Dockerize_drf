@@ -23,24 +23,22 @@ class MovieList(APIView):
             return Response(data=ser.data, status=status.HTTP_201_CREATED)
         return Response(data=ser.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request):
-        movies = Movie.objects.all()
-        ser = MovieSerializer(data=movies, many=True)
-        if ser.is_valid():
-            return Response(ser.data, status.HTTP_200_OK)
-        return Response(ser.errors, status.HTTP_400_BAD_REQUEST)
+    # def get(self, request, format=None):
+    #     movies = Movie.objects.all()
+    #     ser = MovieSerializer(data=movies, many=True)
+    #     if ser.is_valid():
+    #         return Response(ser.data, status.HTTP_200_OK)
+    #     return Response(ser.errors, status.HTTP_400_BAD_REQUEST)
 
 
 class MovieDetail(APIView):
     def get_object(self, pk):
         try:
             return Movie.objects.get(id=pk)
-        except:
+        except Movie.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk):
+    def get(self, request, pk, format=None):
         item = self.get_object(pk=pk)
         ser = MovieSerializer(item)
-        if ser.is_valid():
-            return Response(ser.data, status.HTTP_200_OK)
-        return Response(ser.errors, status.HTTP_400_BAD_REQUEST)
+        return Response(ser.data)
