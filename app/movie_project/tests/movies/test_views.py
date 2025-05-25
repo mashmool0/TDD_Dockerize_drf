@@ -64,13 +64,12 @@ def test_add_movie_invalid_json_keys(client):
 
 
 @pytest.mark.django_db
-def test_get_single_movie(client):
-    movies = Movie.objects.create(
-        title="test", genre='test genre', year='1999')
+def test_get_single_movie(client, add_movie):
+    movies = add_movie("gol gol ", 'bol bol ', '2000')
 
     resp = client.get(f'/api/movies/{movies.id}/')
     assert resp.status_code == 200
-    assert resp.data['title'] == 'test'
+    assert resp.data['title'] == movies.title
 
 
 @pytest.mark.django_db
