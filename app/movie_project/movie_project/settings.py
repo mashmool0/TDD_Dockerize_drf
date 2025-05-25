@@ -15,6 +15,8 @@ import os
 from dotenv import load_dotenv
 
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'movie_project.settings')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'movies',
     'rest_framework',
+
+    # My App
+    'movies',
 ]
 
 MIDDLEWARE = [
