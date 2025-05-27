@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-
+# import dj_database_url
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'movie_project.settings')
 
@@ -42,11 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+]
 
-    # My App
+THIRD_PARTY_APPS = [
+    'rest_framework',
+]
+
+LOCAL_APPS = [
     'movies',
 ]
+
+INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -98,6 +104,10 @@ DATABASES = {
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
+
+# DATABASE_URL = os.getenv("DATABASE_URL")
+# db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
