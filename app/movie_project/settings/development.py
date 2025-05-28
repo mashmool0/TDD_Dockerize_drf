@@ -1,5 +1,9 @@
 from .base import *
 
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'settings.development')
+
 # Debug
 DEBUG = True
 

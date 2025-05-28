@@ -1,11 +1,13 @@
 import os
 
-# تشخیص محیط از متغیر محیطی
-ENVIRONMENT = os.getenv('DJANGO_ENVIRONMENT', 'development')
 
-if ENVIRONMENT == 'production':
+environment = os.environ.get('DJANGO_ENVIRONMENT', 'development')
+
+if environment == 'production':
     from .production import *
-elif ENVIRONMENT == 'development':
-    from .development import *
+elif environment == 'staging':
+    from .staging import *
+elif environment == 'testing':
+    from .testing import *
 else:
-    from .development import *  # default
+    from .development import *

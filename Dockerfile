@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 
 # install system dependency 
 RUN apt-get update \
-  && apt-get -y install gcc postgresql \
+  && apt-get -y install gcc postgresql netcat-traditional \
   && apt-get clean \ 
   && apt-get -y install libpq-dev gcc \
   && pip install psycopg2
@@ -21,11 +21,13 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 
-# add app
-COPY . .
 # change entrypoint to exe file 
 COPY ./app/entrypoint.sh /usr/src/app/entrypoint.sh
 RUN chmod +x /usr/src/app/entrypoint.sh
+
+# add app
+COPY . .
+
 
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
