@@ -3,6 +3,8 @@ import os
 
 environment = os.environ.get('DJANGO_ENVIRONMENT', 'development')
 
+print(environment)
+
 if environment == 'production':
     from .production import *
 elif environment == 'staging':
